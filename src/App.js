@@ -7,6 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'; // Importing bootstrap
 import { Navbar, Nav } from 'react-bootstrap'; // Importing navbar/nav
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import { Read } from './components/read';
+import { Create } from './components/create';
 
 // changed function "App" to a class
 // inherits from react.component
@@ -30,14 +32,9 @@ class App extends React.Component {
           {/*  Switching in and out components  */}
           {/* Home page, "exact" used to only see home, otherwise would show Content component for all URL's */}
           <Route path='/' component ={Content} exact></Route> 
-          <Route path='/read' component={Header}></Route>
-          <Route path='/create' component={Footer}></Route>
+          <Route path='/read' component={Read}></Route>
+          <Route path='/create' component={Create}></Route>
         </Switch>
-
-
-
-
-
 
         {/* <Header></Header>
         <Content></Content>
