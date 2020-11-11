@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios'; // axios imported
 
 export class Create extends React.Component {
 
@@ -46,8 +47,22 @@ export class Create extends React.Component {
         alert("Movie Added " 
         + this.state.Title + " " + 
         this.state.Year + " " +
-        this.state.Poster)
+        this.state.Poster);
 
+        // Object being sent up - title, year and poster are lowercase as they are set that way in the server.js
+        const newMovie = {
+            title: this.state.Title,
+            year: this.state.Year,
+            poster: this.state.Poster
+        }
+        // POST request - returns a PROMISE
+        axios.post('http://localhost:4000/api/movies', newMovie)
+        .then((res)=>{
+            console.log(res);
+        })
+        .catch((err)=>{
+            console.log(err);
+        });
     }
 
     // render method
