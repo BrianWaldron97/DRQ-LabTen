@@ -93,6 +93,18 @@ app.get('/api/movies/:id', (req, res)=>{
     })
 });
 
+// HTTP Req - delete
+app.delete('/api/movies/:id', (req, res)=>{
+    console.log('Delete '+req.params.id);
+
+    // Deleting Movie by ID
+    movieModel.findByIdAndDelete({_id:req.params.id}, (err, data)=>{
+        if(err)
+            res.send(err);
+        res.send(data);
+    })
+})
+
 // Listening for a POST request at /api/movies - pull the info
 app.post('/api/movies', (req, res)=>{
     console.log('Movie Recieved!');

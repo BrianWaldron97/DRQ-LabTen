@@ -7,7 +7,7 @@ export class Movies extends React.Component {
         // for every object in the array, a new item is created (call back)
         // key is a unique identifier for each item
         return this.props.mymovies.map((movie)=> {
-            return <MovieItem mymovie={movie} key={movie.imdbID}></MovieItem>
+            return <MovieItem mymovie={movie} ReloadData={this.props.ReloadData} key={movie._id}></MovieItem>
         })
         
         //(
