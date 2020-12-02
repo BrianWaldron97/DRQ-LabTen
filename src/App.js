@@ -9,6 +9,7 @@ import { Navbar, Nav } from 'react-bootstrap'; // Importing navbar/nav
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import { Read } from './components/read';
 import { Create } from './components/create';
+import { Edit } from './components/edit';
 
 // changed function "App" to a class
 // inherits from react.component
@@ -34,6 +35,7 @@ class App extends React.Component {
           <Route path='/' component ={Content} exact></Route> 
           <Route path='/read' component={Read}></Route>
           <Route path='/create' component={Create}></Route>
+          <Route path='/edit/:id' component={Edit}></Route>
         </Switch>
 
         {/* <Header></Header>

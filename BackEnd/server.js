@@ -82,7 +82,7 @@ app.get('/api/movies', (req, res) => {
 
 })
 
-
+// HTTP Req - get
 app.get('/api/movies/:id', (req, res)=>{
     // Passes ID to the console
     console.log(req.params.id);
@@ -92,6 +92,18 @@ app.get('/api/movies/:id', (req, res)=>{
         res.json(data);
     })
 });
+
+// HTTP Req - put
+app.put('/api/movies/:id',(req, res)=>{
+    console.log("Update "+req.params.id);
+
+    // Callback - Replacing with a new record
+    movieModel.findByIdAndUpdate(req.params.id,
+        req.body,
+        (err, data)=>{
+            res.status(200).send(data);
+        })
+})
 
 // HTTP Req - delete
 app.delete('/api/movies/:id', (req, res)=>{

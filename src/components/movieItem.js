@@ -2,11 +2,13 @@ import React from 'react';
 import Card from 'react-bootstrap/Card'; // when using a card, you have to import this
 import Button from 'react-bootstrap/Button'; // importing button
 import axios from 'axios'; // importing axios - http client
+import { Link } from 'react-router-dom'; // importing Link
+
 
 export class MovieItem extends React.Component {
 
     // Constructor
-    constructor(){
+    constructor() {
         // Invoke parent constructor
         super();
 
@@ -15,18 +17,18 @@ export class MovieItem extends React.Component {
     }
 
     // DeleteMovie Method
-    DeleteMovie(e){
+    DeleteMovie(e) {
         // Prevents firing on start
         e.preventDefault();
 
         // URL of where we want to delete (note extra '/' at end of movies) - creating new URL 
-        axios.delete('http://localhost:4000/api/movies/'+this.props.mymovie._id)
-        .then(()=>{
-            this.props.ReloadData(); // Passing method all the way from read.js
-        })
-        .catch((err)=>{
-            console.log(err);
-        });
+        axios.delete('http://localhost:4000/api/movies/' + this.props.mymovie._id)
+            .then(() => {
+                this.props.ReloadData(); // Passing method all the way from read.js
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }
 
     render() {
@@ -46,8 +48,11 @@ export class MovieItem extends React.Component {
                                 {this.props.mymovie.year}
                             </footer>
                         </blockquote>
+                        <Button variant="danger" onClick={this.DeleteMovie}>Delete</Button>
+                        {/* Changing the URL */}
+                        <Link to={"/edit/" + this.props.mymovie._id} className="btn btn-primary">Edit</Link>
                     </Card.Body>
-                    <Button variant="danger" onClick={this.DeleteMovie}>Delete</Button>
+
                 </Card>
 
             </div>
