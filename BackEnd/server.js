@@ -11,8 +11,12 @@ const cors = require('cors');
 // Acquiring Mongoose
 const mongoose = require('mongoose');
 
-app.use(cors());
+//
+const path = require('path');
 
+// Cors no longer needed - not two domains anymore
+/*
+app.use(cors());
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
@@ -20,7 +24,13 @@ app.use(function (req, res, next) {
         "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+*/
 
+// Path for build folder
+app.use(express.static(path.join(__dirname, '../build')));
+
+// Path for static folder
+app.use('/static', express.static(path.join(__dirname, 'build/static')));
 
 // body parser
 const bodyParser = require('body-parser'); 
@@ -37,12 +47,14 @@ mongoose.connect(strConnection, {useNewUrlParser: true});
 // Schema allows us to store what we want - what kind of data
 const Schema = mongoose.Schema;
 
+
 // New instance of Schema
 var movieSchema = new Schema({
     title:String,
     year:String,
     poster:String
 });
+
 
 // Collection to be stored in - name, schema
 var movieModel = mongoose.model('film', movieSchema);
@@ -132,6 +144,11 @@ app.post('/api/movies', (req, res)=>{
 
     res.send('Data Recieved!');
 
+})
+
+// GET request - Any URL not already taken/specified will return app
+app.get('*', (req,res)=>{
+    res.sendFile(path.join(__dirname+'/../build/index.html'));
 })
 
 app.listen(port, () => {
